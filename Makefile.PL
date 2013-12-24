@@ -5,7 +5,7 @@
 use strict;
 use warnings;
 
-
+use 5.018;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -14,20 +14,17 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "handle numerals in Unicode using the libuninum library",
   "AUTHOR" => "Zakariyya Mughal <zmughal\@cpan.org>",
-  "BUILD_REQUIRES" => {},
-  "CCFLAGS" => "-I/home/zaki/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/auto/share/dist/Alien-Uninum/include/uninum",
+  "BUILD_REQUIRES" => {
+    "Alien::Uninum" => 0
+  },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Unicode-Number",
   "EXE_FILES" => [],
-  "LIBS" => [
-    "-L/home/zaki/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/auto/share/dist/Alien-Uninum/lib -luninum"
-  ],
   "LICENSE" => "perl",
   "NAME" => "Unicode::Number",
   "PREREQ_PM" => {
-    "Alien::Uninum" => 0,
     "Carp" => 0,
     "Encode" => 0,
     "List::AllUtils" => 0,
@@ -42,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "XS" => {
     "lib/Unicode/Number.xs" => "lib/Unicode/Number.c"
   },
@@ -50,6 +47,10 @@ my %WriteMakefileArgs = (
     "TESTS" => "t/*.t"
   }
 );
+require Alien::Uninum;
+my $u = Alien::Uninum->new;
+$WriteMakefileArgs{CCFLAGS} = $u->cflags;
+$WriteMakefileArgs{LIBS} = $u->libs;
 
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {

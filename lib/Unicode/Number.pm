@@ -1,12 +1,11 @@
 package Unicode::Number;
 {
-  $Unicode::Number::VERSION = '0.001';
+  $Unicode::Number::VERSION = '0.002';
 }
 
 use strict;
 use warnings;
 
-use Alien::Uninum;
 use List::AllUtils qw/first/;
 use Encode qw(encode decode decode_utf8);
 use Config;
@@ -109,7 +108,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
