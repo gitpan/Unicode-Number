@@ -1,13 +1,13 @@
 package Unicode::Number;
 {
-  $Unicode::Number::VERSION = '0.002';
+  $Unicode::Number::VERSION = '0.003';
 }
 
 use strict;
 use warnings;
 
 use List::AllUtils qw/first/;
-use Encode qw(encode decode decode_utf8);
+use Encode qw(encode decode);
 use Config;
 use Carp;
 use Unicode::Number::System;
@@ -78,7 +78,7 @@ sub _get_ns_id {
 
 sub _utf32_str_to_utf8_str {
 	my ($self, $digits_string) = @_;
-	decode_utf8 decode($self->_get_utf32_encoding, $digits_string );
+	decode($self->_get_utf32_encoding, $digits_string );
 }
 
 sub _utf8_str_to_utf32_str {
@@ -108,15 +108,14 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
   use Unicode::Number;
-  use Encode qw(decode_utf8);
 
   my $u = Unicode::Number->new;
-  my $lao_str = decode_utf8 "\x{0ED5}\x{0ED7}\x{0ED6}";
+  my $lao_str = "\x{0ED5}\x{0ED7}\x{0ED6}";
   my $ns = $u->guess_number_system($lao_str);
   say $u->string_to_number($ns, $lao_str)->to_string; # 576
 

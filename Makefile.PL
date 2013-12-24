@@ -5,7 +5,7 @@
 use strict;
 use warnings;
 
-use 5.018;
+
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -39,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "utf8" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "XS" => {
     "lib/Unicode/Number.xs" => "lib/Unicode/Number.c"
   },
