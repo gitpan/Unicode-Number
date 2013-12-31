@@ -1,6 +1,6 @@
 package Unicode::Number;
 {
-  $Unicode::Number::VERSION = '0.004_01';
+  $Unicode::Number::VERSION = '0.005';
 }
 
 use strict;
@@ -93,6 +93,7 @@ sub _get_utf32_encoding {
 	$Config{byteorder} eq '12345678' ? 'UTF-32LE' : 'UTF-32BE'
 }
 
+
 1;
 # ABSTRACT: handle numerals in Unicode using the libuninum library
 
@@ -108,7 +109,7 @@ Unicode::Number - handle numerals in Unicode using the libuninum library
 
 =head1 VERSION
 
-version 0.004_01
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -175,9 +176,15 @@ Otherwise, if the number system is unknown, returns C<undef>.
 
 The value of $digits_string must be encoded in UTF-8.
 
+=head2 version
+
+Returns a string with the version of the libuninum library.
+
 =head1 SEE ALSO
 
 L<libuninum|http://billposer.org/Software/libuninum.html>
+
+L<CLDR::Number>
 
 =head1 AUTHOR
 
